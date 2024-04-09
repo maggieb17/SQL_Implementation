@@ -33,7 +33,7 @@ namespace SQL_Implementation
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Data Source=LAB108PC21\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
             conn.Open();
             SqlCommand cmdd = new SqlCommand("SELECT ID, CountryName from Countries", conn);
             SqlDataAdapter adapterr = new SqlDataAdapter();
@@ -47,7 +47,7 @@ namespace SQL_Implementation
             conn.Close();
 
 
-            SqlConnection con = new SqlConnection(@"Data Source=LAB108PC21\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
             SqlCommand cmd = new SqlCommand("SELECT ID, townName from Towns", con);
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -82,7 +82,7 @@ namespace SQL_Implementation
 
         private void LoadTownsForCountry(int countryId)
         {
-            string connectionString = @"Data Source=LAB108PC21\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True";
+            string connectionString = @"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 string query = "SELECT ID, CityName FROM Cities WHERE CountryID = @CountryID";
@@ -101,7 +101,7 @@ namespace SQL_Implementation
 
         private void countriesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=LAB108PC21\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
             string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {

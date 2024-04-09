@@ -43,9 +43,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(282, 91);
+            label1.Location = new Point(197, 55);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(57, 25);
+            label1.Size = new Size(38, 15);
             label1.TabIndex = 0;
             label1.Text = "Town:";
             label1.Click += label1_Click;
@@ -53,9 +54,10 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(305, 49);
+            label2.Location = new Point(214, 29);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(34, 25);
+            label2.Size = new Size(21, 15);
             label2.TabIndex = 1;
             label2.Text = "ID:";
             label2.Click += label2_Click;
@@ -63,34 +65,37 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(540, 91);
+            label3.Location = new Point(378, 55);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(0, 25);
+            label3.Size = new Size(0, 15);
             label3.TabIndex = 2;
             // 
             // townComboBox
             // 
             townComboBox.FormattingEnabled = true;
-            townComboBox.Location = new Point(97, 219);
+            townComboBox.Location = new Point(68, 131);
+            townComboBox.Margin = new Padding(2, 2, 2, 2);
             townComboBox.Name = "townComboBox";
-            townComboBox.Size = new Size(182, 33);
+            townComboBox.Size = new Size(129, 23);
             townComboBox.TabIndex = 3;
             // 
             // townListBox
             // 
             townListBox.FormattingEnabled = true;
-            townListBox.ItemHeight = 25;
-            townListBox.Location = new Point(329, 219);
+            townListBox.ItemHeight = 15;
+            townListBox.Location = new Point(230, 131);
+            townListBox.Margin = new Padding(2, 2, 2, 2);
             townListBox.Name = "townListBox";
-            townListBox.Size = new Size(180, 129);
+            townListBox.Size = new Size(127, 79);
             townListBox.TabIndex = 4;
-            townListBox.SelectedIndexChanged += townListBox_SelectedIndexChanged;
             // 
             // button1
             // 
-            button1.Location = new Point(179, 162);
+            button1.Location = new Point(125, 97);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(112, 34);
+            button1.Size = new Size(78, 20);
             button1.TabIndex = 5;
             button1.Text = "Add town";
             button1.UseVisualStyleBackColor = true;
@@ -98,9 +103,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(345, 162);
+            button2.Location = new Point(242, 97);
+            button2.Margin = new Padding(2, 2, 2, 2);
             button2.Name = "button2";
-            button2.Size = new Size(128, 34);
+            button2.Size = new Size(90, 20);
             button2.TabIndex = 6;
             button2.Text = "Update town";
             button2.UseVisualStyleBackColor = true;
@@ -108,32 +114,36 @@
             // 
             // button3
             // 
-            button3.Location = new Point(528, 162);
+            button3.Location = new Point(370, 97);
+            button3.Margin = new Padding(2, 2, 2, 2);
             button3.Name = "button3";
-            button3.Size = new Size(140, 34);
+            button3.Size = new Size(98, 20);
             button3.TabIndex = 7;
             button3.Text = "Delete town";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // idTextBox
             // 
-            idTextBox.Location = new Point(345, 46);
+            idTextBox.Location = new Point(242, 28);
+            idTextBox.Margin = new Padding(2, 2, 2, 2);
             idTextBox.Name = "idTextBox";
-            idTextBox.Size = new Size(150, 31);
+            idTextBox.Size = new Size(106, 23);
             idTextBox.TabIndex = 8;
             // 
             // townTextBox
             // 
-            townTextBox.Location = new Point(345, 91);
+            townTextBox.Location = new Point(242, 55);
+            townTextBox.Margin = new Padding(2, 2, 2, 2);
             townTextBox.Name = "townTextBox";
-            townTextBox.Size = new Size(150, 31);
+            townTextBox.Size = new Size(106, 23);
             townTextBox.TabIndex = 9;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(560, 270);
             Controls.Add(townTextBox);
             Controls.Add(idTextBox);
             Controls.Add(button3);
@@ -144,6 +154,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;

@@ -36,7 +36,7 @@ namespace SQL_Implementation
                 DialogResult answer = form2.ShowDialog();
             }
 
-            if (textBox1.Text == "kris1234" && textBox2.Text == "D123#")
+            if (textBox1.Text == "k" && textBox2.Text == "1")
             {
                 data = "Admin";
                 ConditionMet = true;
