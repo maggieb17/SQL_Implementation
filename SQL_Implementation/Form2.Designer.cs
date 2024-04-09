@@ -61,6 +61,7 @@
             countriesComboBox.Name = "countriesComboBox";
             countriesComboBox.Size = new Size(182, 33);
             countriesComboBox.TabIndex = 2;
+            countriesComboBox.SelectedIndexChanged += countriesComboBox_SelectedIndexChanged;
             // 
             // townComboBox
             // 
@@ -69,6 +70,7 @@
             townComboBox.Name = "townComboBox";
             townComboBox.Size = new Size(182, 33);
             townComboBox.TabIndex = 3;
+            townComboBox.SelectedIndexChanged += townComboBox_SelectedIndexChanged;
             // 
             // label3
             // 

@@ -50,7 +50,7 @@ namespace SQL_Implementation
         {
             SqlConnection con = new SqlConnection(@"Data Source=LAB108PC21\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Towns (townName) VALUES (@city)", con); 
+            SqlCommand cmd = new SqlCommand("INSERT INTO Towns (townName) VALUES (@city)", con);
             cmd.Parameters.AddWithValue("@city", townTextBox.Text);
             cmd.ExecuteNonQuery();
             con.Close();
@@ -70,6 +70,9 @@ namespace SQL_Implementation
             MessageBox.Show("Record was updated!");
         }
 
+        private void townListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

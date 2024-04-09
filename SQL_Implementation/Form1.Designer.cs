@@ -84,6 +84,7 @@
             townListBox.Name = "townListBox";
             townListBox.Size = new Size(180, 129);
             townListBox.TabIndex = 4;
+            townListBox.SelectedIndexChanged += townListBox_SelectedIndexChanged;
             // 
             // button1
             // 

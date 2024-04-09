@@ -33,6 +33,7 @@
             label3 = new Label();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
+            button1 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -74,14 +75,26 @@
             // 
             textBox2.Location = new Point(309, 236);
             textBox2.Name = "textBox2";
+            textBox2.PasswordChar = '*';
             textBox2.Size = new Size(150, 31);
             textBox2.TabIndex = 4;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(330, 312);
+            button1.Name = "button1";
+            button1.Size = new Size(112, 34);
+            button1.TabIndex = 5;
+            button1.Text = "Submit";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
             // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(label3);
@@ -100,5 +113,6 @@
         private Label label3;
         private TextBox textBox1;
         private TextBox textBox2;
+        private Button button1;
     }
 }
