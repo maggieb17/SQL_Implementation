@@ -18,23 +18,34 @@ namespace SQL_Implementation
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load_2(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT ID, townName from Towns", con);
+            SqlCommand cmd = new SqlCommand("SELECT ID, CountryName from Countries", con);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = cmd;
             DataTable dt = new DataTable();
 
             adapter.Fill(dt);
             townComboBox.DataSource = dt;
-            townComboBox.DisplayMember = "townName";
+            townComboBox.DisplayMember = "CountryName";
             townComboBox.ValueMember = "ID";
-            townListBox.DataSource = dt;
+            con.Close();
+
+
+            SqlConnection conn = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
+            conn.Open();
+            SqlCommand cmdd = new SqlCommand("SELECT ID, townName from Towns", conn);
+            SqlDataAdapter adapterr = new SqlDataAdapter();
+            adapter.SelectCommand = cmdd;
+            DataTable dtt = new DataTable();
+
+            adapter.Fill(dtt);
+            townListBox.DataSource = dtt;
             townListBox.DisplayMember = "townName";
             townListBox.ValueMember = "ID";
-            con.Close();
+            conn.Close();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -46,14 +57,49 @@ namespace SQL_Implementation
         {
 
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        private void LoadTownsForCountry(int countryId)
+        {
+            string connectionString = @"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
+
+            }
+        }
+
+
+
+        private void countriesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void townComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
+            string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@CountryID", townComboBox.SelectedIndex + 1);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                adapter.Fill(dt);
+                townListBox.DisplayMember = "townName";
+                townListBox.ValueMember = "ID";
+                townListBox.DataSource = dt;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             try
             {
                 // Manually specified ID
                 int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     conn.Open();
 
@@ -81,18 +127,14 @@ namespace SQL_Implementation
             }
         }
 
-
-
-
-
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             try
             {
                 // Manually specified ID
                 int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     con.Open();
 
@@ -118,24 +160,21 @@ namespace SQL_Implementation
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
-
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)
         {
             try
             {
-                // Manually specified ID for deletion
-                int id = int.Parse(idTextBox.Text); // Assuming 'idTextBox' is where the ID to be deleted is entered
+                int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     con.Open();
 
-                    // Delete the town from the database with the specified ID
                     SqlCommand deleteCmd = new SqlCommand("DELETE FROM Towns WHERE ID = @id", con);
                     deleteCmd.Parameters.AddWithValue("@id", id);
-                    int rowsAffected = deleteCmd.ExecuteNonQuery(); // Execute the delete command
+                    int rowsAffected = deleteCmd.ExecuteNonQuery();
 
                     con.Close();
 

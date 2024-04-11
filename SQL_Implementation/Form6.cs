@@ -37,14 +37,6 @@ namespace SQL_Implementation
 
         }
 
-        private void browseButton_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-            if (openFile.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.Image = new Bitmap(openFile.FileName);
-            }
-        }
         private bool buttonWasClicked = false;
         private byte[] savePhoto()
         {
@@ -54,9 +46,29 @@ namespace SQL_Implementation
             return stream.GetBuffer();
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+
+        private void UpdateButtonState()
         {
-            using SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
+            button1.Enabled = firstBox1.Text != "" && lastBox2.Text != "" && buttonWasClicked==true && (radioButton1.Checked || radioButton2.Checked);
+        }
+
+        private void Form6_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void browseButton_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = new Bitmap(openFile.FileName);
+            }
+        }
+
+        private void saveButton_Click_1(object sender, EventArgs e)
+        {
+            using SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO Picture VALUES (@photo)", con);
             con.Close();
@@ -64,16 +76,10 @@ namespace SQL_Implementation
             buttonWasClicked = true;
         }
 
-        private void UpdateButtonState()
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            button1.Enabled = firstBox1.Text != "" && lastBox2.Text != "" && buttonWasClicked==true && (radioButton1.Checked || radioButton2.Checked);
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
- 
             Form3 form3 = new Form3();
             form3.Show();
-
         }
     }
 }

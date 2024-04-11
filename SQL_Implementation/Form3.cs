@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace SQL_Implementation
 {
@@ -26,9 +28,9 @@ namespace SQL_Implementation
             InitializeComponent();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "s" && textBox2.Text == "D")
+            if (textBox1.Text == "user" && textBox2.Text == "User123!")
             {
                 data = "User";
                 ConditionMet = false;
@@ -36,7 +38,7 @@ namespace SQL_Implementation
                 DialogResult answer = form2.ShowDialog();
             }
 
-            if (textBox1.Text == "k" && textBox2.Text == "1")
+            if (textBox1.Text == "admin" && textBox2.Text == "Admin123!")
             {
                 data = "Admin";
                 ConditionMet = true;
@@ -44,6 +46,61 @@ namespace SQL_Implementation
                 DialogResult answer = form2.ShowDialog();
 
             }
+
+
+
+            
+        }
+
+
+
+
+        string hashPassword(string password)
+        {
+            SHA256 hashAlgorithm = SHA256.Create();
+            var bytes = Encoding.Default.GetBytes(password);
+            var hash = hashAlgorithm.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string salt = "";
+            {
+                salt = DateTime.Now.ToString();
+                textBox3.Text = salt;
+            }
+            string password = textBox1.Text;
+            hashPassword($"{password}{salt}");
+            textBox3.Text = hashPassword(password); 
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string password = textBox2.Text;
+            string Pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%_&*?])[A-Za-z0-9!@#$%_&*?]{8,}$";
+            if (Regex.IsMatch(password, Pattern))
+            {
+                MessageBox.Show("Valid");
+
+                button1.Enabled = true;
+
+            }
+
+            else
+            {
+                MessageBox.Show("Invalid");
+            }
+
+
+        }
+
+
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

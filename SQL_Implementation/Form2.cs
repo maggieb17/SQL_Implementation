@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SQL_Implementation
 {
@@ -30,40 +29,36 @@ namespace SQL_Implementation
             this.parent = parent;
             button1.Text = this.parent.Data;
         }
-
-        private void Form2_Load(object sender, EventArgs e)
+        private void Form2_Load_1(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
-            conn.Open();
-            SqlCommand cmdd = new SqlCommand("SELECT ID, CountryName from Countries", conn);
-            SqlDataAdapter adapterr = new SqlDataAdapter();
-            adapterr.SelectCommand = cmdd;
-            DataTable dtt = new DataTable();
-
-            adapterr.Fill(dtt);
-            countriesComboBox.DataSource = dtt;
-            countriesComboBox.DisplayMember = "CountryName";
-            countriesComboBox.ValueMember = "ID";
-            conn.Close();
-
-
-            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT ID, townName from Towns", con);
+            SqlCommand cmd = new SqlCommand("SELECT ID, CountryName from Countries", con);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = cmd;
             DataTable dt = new DataTable();
 
             adapter.Fill(dt);
-            townComboBox.DataSource = dt;
-            townComboBox.DisplayMember = "townName";
-            townComboBox.ValueMember = "ID";
+            countriesComboBox.DataSource = dt;
+            countriesComboBox.DisplayMember = "CountryName";
+            countriesComboBox.ValueMember = "ID";
             con.Close();
 
 
+            SqlConnection conn = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
+            conn.Open();
+            SqlCommand cmdd = new SqlCommand("SELECT ID, townName from Towns", conn);
+            SqlDataAdapter adapterr = new SqlDataAdapter();
+            adapter.SelectCommand = cmdd;
+            DataTable dtt = new DataTable();
 
-
+            adapter.Fill(dtt);
+            townComboBox.DataSource = dtt;
+            townComboBox.DisplayMember = "townName";
+            townComboBox.ValueMember = "ID";
+            conn.Close();
         }
+
         public Form2(Form3 parent, bool conditionMet)
         {
             InitializeComponent();
@@ -82,26 +77,24 @@ namespace SQL_Implementation
 
         private void LoadTownsForCountry(int countryId)
         {
-            string connectionString = @"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True";
+            string connectionString = @"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 string query = "SELECT ID, CityName FROM Cities WHERE CountryID = @CountryID";
                 
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form1 form = new Form1();
-            form.Show();
-        }
+
 
         private void townComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
 
-        private void countriesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void countriesComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
             string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
@@ -110,10 +103,21 @@ namespace SQL_Implementation
                 DataTable dt = new DataTable();
 
                 adapter.Fill(dt);
-                townComboBox.DisplayMember = "CityName";
+                townComboBox.DisplayMember = "townName";
                 townComboBox.ValueMember = "ID";
                 townComboBox.DataSource = dt;
             }
+        }
+
+        private void townComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            form.Show();
         }
     }
 }
