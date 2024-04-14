@@ -104,17 +104,19 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(235, 182);
             this.textBox3.Name = "textBox3";
+            this.textBox3.PasswordChar = '*';
             this.textBox3.Size = new System.Drawing.Size(106, 23);
             this.textBox3.TabIndex = 19;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(163, 185);
+            this.label5.Location = new System.Drawing.Point(119, 185);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 15);
+            this.label5.Size = new System.Drawing.Size(107, 15);
             this.label5.TabIndex = 17;
-            this.label5.Text = "Hashcode:";
+            this.label5.Text = "Confirm Password:";
             // 
             // button2
             // 

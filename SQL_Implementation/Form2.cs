@@ -23,6 +23,8 @@ namespace SQL_Implementation
                 return answer;
             }
         }
+
+
         public Form2(Form3 parent)
         {
             InitializeComponent();
@@ -118,6 +120,13 @@ namespace SQL_Implementation
         {
             Form1 form = new Form1();
             form.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form6 form6 = new Form6(this);
+            form6.Show();
+            this.Hide();
         }
     }
 }

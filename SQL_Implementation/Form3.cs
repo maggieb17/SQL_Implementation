@@ -30,13 +30,6 @@ namespace SQL_Implementation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "user" && textBox2.Text == "User123!")
-            {
-                data = "User";
-                ConditionMet = false;
-                Form2 form2 = new Form2(this, ConditionMet);
-                DialogResult answer = form2.ShowDialog();
-            }
 
             if (textBox1.Text == "admin" && textBox2.Text == "Admin123!")
             {
@@ -46,10 +39,18 @@ namespace SQL_Implementation
                 DialogResult answer = form2.ShowDialog();
 
             }
+            else if (textBox2.Text == textBox3.Text)
+            {
+                data = "User";
+                ConditionMet = false;
+                Form2 form2 = new Form2(this, ConditionMet);
+                DialogResult answer = form2.ShowDialog();
+            }
+            else 
+            {
+                MessageBox.Show("Passwords don't match!");
+            }
 
-
-
-            
         }
 
 
@@ -65,14 +66,15 @@ namespace SQL_Implementation
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string salt = "";
-            {
-                salt = DateTime.Now.ToString();
-                textBox3.Text = salt;
-            }
-            string password = textBox1.Text;
-            hashPassword($"{password}{salt}");
-            textBox3.Text = hashPassword(password); 
+            //string salt = "";
+            //{
+            //    salt = DateTime.Now.ToString();
+            //    textBox3.Text = salt;
+            //}
+            //string password = textBox1.Text;
+            //hashPassword($"{password}{salt}");
+            //textBox3.Text = hashPassword(password); 
+            MessageBox.Show("Done");
             
         }
 
@@ -99,6 +101,11 @@ namespace SQL_Implementation
 
 
         private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }

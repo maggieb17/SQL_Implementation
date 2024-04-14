@@ -16,16 +16,20 @@ namespace SQL_Implementation
 {
     public partial class Form6 : Form
     {
-        public Form6()
+        private Form2 form2Instance;
+        public Form6(Form2 form2Instance)
         {
             InitializeComponent();
+            this.form2Instance = form2Instance;
             firstBox1.TextChanged += (sender, e) => UpdateButtonState();
             lastBox2.TextChanged += (sender, e) => UpdateButtonState();
             radioButton1.CheckedChanged += (sender, e) => UpdateButtonState();
             radioButton2.CheckedChanged += (sender, e) => UpdateButtonState();
             // This initial call is to set the correct initial state of button1 based on existing conditions
             UpdateButtonState();
+
         }
+
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -78,8 +82,8 @@ namespace SQL_Implementation
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3();
-            form3.Show();
+            form2Instance.Show();
+            this.Close();
         }
     }
 }

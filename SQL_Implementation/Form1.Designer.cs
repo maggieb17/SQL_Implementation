@@ -72,7 +72,7 @@
             // townComboBox
             // 
             this.townComboBox.FormattingEnabled = true;
-            this.townComboBox.Location = new System.Drawing.Point(68, 131);
+            this.townComboBox.Location = new System.Drawing.Point(69, 153);
             this.townComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.townComboBox.Name = "townComboBox";
             this.townComboBox.Size = new System.Drawing.Size(129, 23);
@@ -83,7 +83,7 @@
             // 
             this.townListBox.FormattingEnabled = true;
             this.townListBox.ItemHeight = 15;
-            this.townListBox.Location = new System.Drawing.Point(230, 131);
+            this.townListBox.Location = new System.Drawing.Point(231, 153);
             this.townListBox.Margin = new System.Windows.Forms.Padding(2);
             this.townListBox.Name = "townListBox";
             this.townListBox.Size = new System.Drawing.Size(127, 79);
@@ -94,7 +94,7 @@
             this.button1.Location = new System.Drawing.Point(125, 97);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 20);
+            this.button1.Size = new System.Drawing.Size(78, 30);
             this.button1.TabIndex = 5;
             this.button1.Text = "Add town";
             this.button1.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@
             this.button2.Location = new System.Drawing.Point(242, 97);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 20);
+            this.button2.Size = new System.Drawing.Size(90, 30);
             this.button2.TabIndex = 6;
             this.button2.Text = "Update town";
             this.button2.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             this.button3.Location = new System.Drawing.Point(370, 97);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 20);
+            this.button3.Size = new System.Drawing.Size(98, 30);
             this.button3.TabIndex = 7;
             this.button3.Text = "Delete town";
             this.button3.UseVisualStyleBackColor = true;
