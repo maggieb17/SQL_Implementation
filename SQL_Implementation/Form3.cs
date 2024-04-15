@@ -24,6 +24,7 @@ namespace SQL_Implementation
             }
         }
         public bool ConditionMet { get; private set; }
+        public bool Admin { get; private set; }
         public Form3()
         {
             InitializeComponent();
@@ -61,7 +62,7 @@ namespace SQL_Implementation
             }
             else if (textBox2.Text == textBox3.Text && textBox1.Text != "@username")
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     con.Open();
 
@@ -69,15 +70,14 @@ namespace SQL_Implementation
                     checkCmd.Parameters.AddWithValue("@username", textBox1.Text);
                     int existingUserCount = (int)checkCmd.ExecuteScalar();
                     SqlCommand checkCmd2 = new SqlCommand("SELECT COUNT(*) FROM Users WHERE Password = @password", con);
-                    checkCmd2.Parameters.AddWithValue("@password", textBox2.Text);
-                    int existingUserCount2 = (int)checkCmd2.ExecuteScalar();
 
-                    if (existingUserCount > 0 && existingUserCount2 == 0)
+
+                    if (existingUserCount > 0 && textBox2.Text == "@password")
                     {
                         MessageBox.Show("This username is taken");
                     }
 
-                    else if (existingUserCount > 0 && existingUserCount2>0)
+                    else if (existingUserCount > 0 && textBox2.Text != "@password")
                     {
                         ConditionMet = false;
                         Form2 form2 = new Form2(this, ConditionMet);
@@ -89,15 +89,10 @@ namespace SQL_Implementation
                         insertCmd.Parameters.AddWithValue("@username", textBox1.Text);
                         insertCmd.Parameters.AddWithValue("@datetime", salt); 
                         insertCmd.Parameters.AddWithValue("@password", textBox3.Text);
-                        int userID = Convert.ToInt32(insertCmd.ExecuteScalar()); // Retrieve the generated UserID
-
-
-                        // Execute the insert command
                         int rowsAffected = insertCmd.ExecuteNonQuery();
 
                         ConditionMet = false;
                         Form2 form2 = new Form2(this, ConditionMet);
-
                         DialogResult answer = form2.ShowDialog();
                     }
                 }
@@ -152,6 +147,23 @@ namespace SQL_Implementation
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            Form7 form7 = new Form7(this);
+            form7.Show();
+            this.Hide();
         }
     }
 }

@@ -64,7 +64,57 @@ namespace SQL_Implementation
 
         }
 
-        private void browseButton_Click_1(object sender, EventArgs e)
+
+
+
+
+
+        private void DisplayImageFromDatabase()
+        {
+            using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+            {
+                con.Open();
+
+                // Fetch the image bytes from the database
+                SqlCommand cmdd = new SqlCommand("SELECT ID from Users", con);
+                int userID = Convert.ToInt32(cmdd.ExecuteScalar());
+                SqlCommand selectCmd = new SqlCommand("SELECT Picture FROM User_Profiles WHERE UserID = @userID", con);
+                selectCmd.Parameters.AddWithValue("@userID", userID); // Assuming you have userID defined somewhere
+                byte[] imageBytes = (byte[])selectCmd.ExecuteScalar();
+
+                // Convert byte array back to image
+                Image image = ByteArrayToImage(imageBytes);
+
+                // Set the image to the PictureBox control
+                pictureBox1.Image = image;
+
+                con.Close();
+            }
+        }
+
+        private Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            using (MemoryStream ms = new MemoryStream(byteArrayIn))
+            {
+                Image returnImage = Image.FromStream(ms);
+                return returnImage;
+            }
+        }
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // You can change the format as needed
+                return ms.ToArray();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void browseButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
             if (openFile.ShowDialog() == DialogResult.OK)
@@ -73,9 +123,9 @@ namespace SQL_Implementation
             }
         }
 
-        private void saveButton_Click_1(object sender, EventArgs e)
+        private void saveButton_Click(object sender, EventArgs e)
         {
-            using SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
+            using SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO Picture VALUES (@photo)", con);
             con.Close();
@@ -83,15 +133,9 @@ namespace SQL_Implementation
             buttonWasClicked = true;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-            using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
             {
                 con.Open();
 
@@ -111,16 +155,7 @@ namespace SQL_Implementation
 
                 con.Close();
 
-            }
-        }
 
-        // Method to convert image to byte array
-        private byte[] ImageToByteArray(Image image)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // You can change the format as needed
-                return ms.ToArray();
             }
         }
     }
