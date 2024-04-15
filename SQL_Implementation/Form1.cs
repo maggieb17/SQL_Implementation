@@ -20,7 +20,7 @@ namespace SQL_Implementation
 
         private void Form1_Load_2(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
             SqlCommand cmd = new SqlCommand("SELECT ID, CountryName from Countries", con);
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -34,7 +34,7 @@ namespace SQL_Implementation
             con.Close();
 
 
-            SqlConnection conn = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
             conn.Open();
             SqlCommand cmdd = new SqlCommand("SELECT ID, townName from Towns", conn);
             SqlDataAdapter adapterr = new SqlDataAdapter();
@@ -60,7 +60,7 @@ namespace SQL_Implementation
 
         private void LoadTownsForCountry(int countryId)
         {
-            string connectionString = @"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True";
+            string connectionString = @"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
@@ -77,7 +77,7 @@ namespace SQL_Implementation
 
         private void townComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
             string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
@@ -99,7 +99,7 @@ namespace SQL_Implementation
                 // Manually specified ID
                 int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection conn = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     conn.Open();
 
@@ -134,7 +134,7 @@ namespace SQL_Implementation
                 // Manually specified ID
                 int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     con.Open();
 
@@ -168,7 +168,7 @@ namespace SQL_Implementation
             {
                 int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     con.Open();
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Data.SqlClient;
 
 namespace SQL_Implementation
 {
@@ -26,6 +27,26 @@ namespace SQL_Implementation
         public Form3()
         {
             InitializeComponent();
+
+        }
+        private string salt = "";
+
+                
+    private void button2_Click(object sender, EventArgs e)
+        {
+            salt = DateTime.Now.ToString();
+            string password = textBox1.Text;
+            hashPassword($"{password}{salt}");
+            MessageBox.Show("Done");
+
+
+            //SqlConnection con2 = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True");
+            //con2.Open();
+            //SqlCommand insertCmd2 = new SqlCommand("INSERT INTO Users (DateTime) VALUES (@datetime)", con2);
+            //insertCmd2.Parameters.AddWithValue("@datetime", salt);
+            //int rowsAffected2 = insertCmd2.ExecuteNonQuery();
+            //con2.Close();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,16 +58,52 @@ namespace SQL_Implementation
                 ConditionMet = true;
                 Form2 form2 = new Form2(this, ConditionMet);
                 DialogResult answer = form2.ShowDialog();
-
             }
-            else if (textBox2.Text == textBox3.Text)
+            else if (textBox2.Text == textBox3.Text && textBox1.Text != "@username")
             {
-                data = "User";
-                ConditionMet = false;
-                Form2 form2 = new Form2(this, ConditionMet);
-                DialogResult answer = form2.ShowDialog();
+                using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-U7IUME5;Initial Catalog=Magdalena;Integrated Security=True"))
+                {
+                    con.Open();
+
+                    SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM Users WHERE Username = @username", con);
+                    checkCmd.Parameters.AddWithValue("@username", textBox1.Text);
+                    int existingUserCount = (int)checkCmd.ExecuteScalar();
+                    SqlCommand checkCmd2 = new SqlCommand("SELECT COUNT(*) FROM Users WHERE Password = @password", con);
+                    checkCmd2.Parameters.AddWithValue("@password", textBox2.Text);
+                    int existingUserCount2 = (int)checkCmd2.ExecuteScalar();
+
+                    if (existingUserCount > 0 && existingUserCount2 == 0)
+                    {
+                        MessageBox.Show("This username is taken");
+                    }
+
+                    else if (existingUserCount > 0 && existingUserCount2>0)
+                    {
+                        ConditionMet = false;
+                        Form2 form2 = new Form2(this, ConditionMet);
+                        DialogResult answer = form2.ShowDialog();
+                    }
+                    else
+                    {
+                        SqlCommand insertCmd = new SqlCommand("INSERT INTO Users (Username, DateTime, Password) VALUES (@username, @datetime, @password)", con);
+                        insertCmd.Parameters.AddWithValue("@username", textBox1.Text);
+                        insertCmd.Parameters.AddWithValue("@datetime", salt); 
+                        insertCmd.Parameters.AddWithValue("@password", textBox3.Text);
+                        int userID = Convert.ToInt32(insertCmd.ExecuteScalar()); // Retrieve the generated UserID
+
+
+                        // Execute the insert command
+                        int rowsAffected = insertCmd.ExecuteNonQuery();
+
+                        ConditionMet = false;
+                        Form2 form2 = new Form2(this, ConditionMet);
+
+                        DialogResult answer = form2.ShowDialog();
+                    }
+                }
             }
-            else 
+
+            else
             {
                 MessageBox.Show("Passwords don't match!");
             }
@@ -64,19 +121,6 @@ namespace SQL_Implementation
             return Convert.ToBase64String(hash);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //string salt = "";
-            //{
-            //    salt = DateTime.Now.ToString();
-            //    textBox3.Text = salt;
-            //}
-            //string password = textBox1.Text;
-            //hashPassword($"{password}{salt}");
-            //textBox3.Text = hashPassword(password); 
-            MessageBox.Show("Done");
-            
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
