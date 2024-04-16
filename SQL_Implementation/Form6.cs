@@ -30,7 +30,7 @@ namespace SQL_Implementation
             radioButton2.CheckedChanged += (sender, e) => UpdateButtonState();
             // This initial call is to set the correct initial state of button1 based on existing conditions
             UpdateButtonState();
-            
+
         }
 
 
@@ -71,7 +71,7 @@ namespace SQL_Implementation
 
         private void DisplayImageFromDatabase()
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
             {
                 con.Open();
 
@@ -125,7 +125,7 @@ namespace SQL_Implementation
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            using SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True");
+            using SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
             con.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO Picture VALUES (@photo)", con);
             con.Close();
@@ -135,7 +135,7 @@ namespace SQL_Implementation
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
             {
                 con.Open();
 

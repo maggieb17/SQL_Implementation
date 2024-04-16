@@ -27,7 +27,7 @@ namespace SQL_Implementation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
             {
                 con.Open();
 

@@ -62,7 +62,7 @@ namespace SQL_Implementation
             }
             else if (textBox2.Text == textBox3.Text && textBox1.Text != "@username")
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source=PIB-Desktop;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
                 {
                     con.Open();
 
