@@ -32,8 +32,8 @@ namespace SQL_Implementation
         }
         private string salt = "";
 
-                
-    private void button2_Click(object sender, EventArgs e)
+
+        private void button2_Click(object sender, EventArgs e)
         {
             salt = DateTime.Now.ToString();
             string password = textBox1.Text;
@@ -57,12 +57,13 @@ namespace SQL_Implementation
             {
                 data = "Admin";
                 ConditionMet = true;
+
                 Form2 form2 = new Form2(this, ConditionMet);
                 DialogResult answer = form2.ShowDialog();
             }
             else if (textBox2.Text == textBox3.Text && textBox1.Text != "@username")
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30"))
                 {
                     con.Open();
 
@@ -87,7 +88,7 @@ namespace SQL_Implementation
                     {
                         SqlCommand insertCmd = new SqlCommand("INSERT INTO Users (Username, DateTime, Password) VALUES (@username, @datetime, @password)", con);
                         insertCmd.Parameters.AddWithValue("@username", textBox1.Text);
-                        insertCmd.Parameters.AddWithValue("@datetime", salt); 
+                        insertCmd.Parameters.AddWithValue("@datetime", salt);
                         insertCmd.Parameters.AddWithValue("@password", textBox3.Text);
                         int rowsAffected = insertCmd.ExecuteNonQuery();
 
@@ -164,6 +165,11 @@ namespace SQL_Implementation
             Form7 form7 = new Form7(this);
             form7.Show();
             this.Hide();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

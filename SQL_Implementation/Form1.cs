@@ -20,7 +20,7 @@ namespace SQL_Implementation
 
         private void Form1_Load_2(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30");
             con.Open();
             SqlCommand cmd = new SqlCommand("SELECT ID, CountryName from Countries", con);
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -34,7 +34,7 @@ namespace SQL_Implementation
             con.Close();
 
 
-            SqlConnection conn = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30");
             conn.Open();
             SqlCommand cmdd = new SqlCommand("SELECT ID, townName from Towns", conn);
             SqlDataAdapter adapterr = new SqlDataAdapter();
@@ -48,6 +48,14 @@ namespace SQL_Implementation
             conn.Close();
         }
 
+        private void LoadData()
+        {
+            // Reload data into ComboBox
+            townComboBox_SelectedIndexChanged(null, EventArgs.Empty);
+
+            // Reload data into ListBox
+            Form1_Load_2(null, EventArgs.Empty);
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -60,7 +68,7 @@ namespace SQL_Implementation
 
         private void LoadTownsForCountry(int countryId)
         {
-            string connectionString = @"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True";
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
@@ -72,12 +80,12 @@ namespace SQL_Implementation
 
         private void countriesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void townComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30");
             string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
@@ -99,7 +107,7 @@ namespace SQL_Implementation
                 // Manually specified ID
                 int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection conn = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30"))
                 {
                     conn.Open();
 
@@ -125,6 +133,7 @@ namespace SQL_Implementation
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
+            LoadData();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -134,7 +143,7 @@ namespace SQL_Implementation
                 // Manually specified ID
                 int id = int.Parse(idTextBox.Text);
 
-                using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30"))
                 {
                     con.Open();
 
@@ -160,18 +169,21 @@ namespace SQL_Implementation
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
+            LoadData();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            try
-            {
-                int id = int.Parse(idTextBox.Text);
+            
 
-                using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
+            
+
+            // Check if an item is selected in the ListBox
+            
+                using (SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30"))
                 {
                     con.Open();
-
+                    int id = int.Parse(idTextBox.Text);
                     SqlCommand deleteCmd = new SqlCommand("DELETE FROM Towns WHERE ID = @id", con);
                     deleteCmd.Parameters.AddWithValue("@id", id);
                     int rowsAffected = deleteCmd.ExecuteNonQuery();
@@ -186,14 +198,44 @@ namespace SQL_Implementation
                     {
                         MessageBox.Show("No town with the specified ID was found to delete.");
                     }
+                    LoadData();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
+            
         }
-    }
 
+            private void townListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        //private void DeleteTown(int townId)
+        //{
+        //    try
+        //    {
+
+        //        using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
+        //        {
+        //            con.Open();
+        //            SqlCommand deleteCmd = new SqlCommand("DELETE FROM Towns WHERE ID = @id", con);
+        //            deleteCmd.Parameters.AddWithValue("@id", townId);
+        //            int rowsAffected = deleteCmd.ExecuteNonQuery();
+
+        //            if (rowsAffected > 0)
+        //            {
+        //                MessageBox.Show("Town with ID " + townId + " was deleted!");
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("No town with the specified ID was found to delete.");
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("An error occurred: " + ex.Message);
+        //    }
+        //}
+    } 
 }
+
+

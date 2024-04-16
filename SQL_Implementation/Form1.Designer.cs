@@ -28,139 +28,139 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.townComboBox = new System.Windows.Forms.ComboBox();
-            this.townListBox = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.idTextBox = new System.Windows.Forms.TextBox();
-            this.townTextBox = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            townComboBox = new ComboBox();
+            townListBox = new ListBox();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            idTextBox = new TextBox();
+            townTextBox = new TextBox();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(197, 55);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Town:";
+            label1.AutoSize = true;
+            label1.Location = new Point(197, 55);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Town:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(214, 29);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "ID:";
+            label2.AutoSize = true;
+            label2.Location = new Point(214, 29);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(21, 15);
+            label2.TabIndex = 1;
+            label2.Text = "ID:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(378, 55);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 15);
-            this.label3.TabIndex = 2;
+            label3.AutoSize = true;
+            label3.Location = new Point(378, 55);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(0, 15);
+            label3.TabIndex = 2;
             // 
             // townComboBox
             // 
-            this.townComboBox.FormattingEnabled = true;
-            this.townComboBox.Location = new System.Drawing.Point(69, 153);
-            this.townComboBox.Margin = new System.Windows.Forms.Padding(2);
-            this.townComboBox.Name = "townComboBox";
-            this.townComboBox.Size = new System.Drawing.Size(129, 23);
-            this.townComboBox.TabIndex = 3;
-            this.townComboBox.SelectedIndexChanged += new System.EventHandler(this.townComboBox_SelectedIndexChanged);
+            townComboBox.FormattingEnabled = true;
+            townComboBox.Location = new Point(69, 153);
+            townComboBox.Margin = new Padding(2);
+            townComboBox.Name = "townComboBox";
+            townComboBox.Size = new Size(129, 23);
+            townComboBox.TabIndex = 3;
+            townComboBox.SelectedIndexChanged += townComboBox_SelectedIndexChanged;
             // 
             // townListBox
             // 
-            this.townListBox.FormattingEnabled = true;
-            this.townListBox.ItemHeight = 15;
-            this.townListBox.Location = new System.Drawing.Point(231, 153);
-            this.townListBox.Margin = new System.Windows.Forms.Padding(2);
-            this.townListBox.Name = "townListBox";
-            this.townListBox.Size = new System.Drawing.Size(127, 79);
-            this.townListBox.TabIndex = 4;
+            townListBox.FormattingEnabled = true;
+            townListBox.ItemHeight = 15;
+            townListBox.Location = new Point(231, 153);
+            townListBox.Margin = new Padding(2);
+            townListBox.Name = "townListBox";
+            townListBox.Size = new Size(127, 79);
+            townListBox.TabIndex = 4;
+            townListBox.SelectedIndexChanged += townListBox_SelectedIndexChanged;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(125, 97);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 30);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Add town";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            button1.Location = new Point(125, 97);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(78, 30);
+            button1.TabIndex = 5;
+            button1.Text = "Add town";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(242, 97);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 30);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Update town";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            button2.Location = new Point(242, 97);
+            button2.Margin = new Padding(2);
+            button2.Name = "button2";
+            button2.Size = new Size(90, 30);
+            button2.TabIndex = 6;
+            button2.Text = "Update town";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_1;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(370, 97);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 30);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Delete town";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            button3.Location = new Point(370, 97);
+            button3.Margin = new Padding(2);
+            button3.Name = "button3";
+            button3.Size = new Size(98, 30);
+            button3.TabIndex = 7;
+            button3.Text = "Delete town";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click_1;
             // 
             // idTextBox
             // 
-            this.idTextBox.Location = new System.Drawing.Point(242, 28);
-            this.idTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(106, 23);
-            this.idTextBox.TabIndex = 8;
+            idTextBox.Location = new Point(242, 28);
+            idTextBox.Margin = new Padding(2);
+            idTextBox.Name = "idTextBox";
+            idTextBox.Size = new Size(106, 23);
+            idTextBox.TabIndex = 8;
             // 
             // townTextBox
             // 
-            this.townTextBox.Location = new System.Drawing.Point(242, 55);
-            this.townTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.townTextBox.Name = "townTextBox";
-            this.townTextBox.Size = new System.Drawing.Size(106, 23);
-            this.townTextBox.TabIndex = 9;
+            townTextBox.Location = new Point(242, 55);
+            townTextBox.Margin = new Padding(2);
+            townTextBox.Name = "townTextBox";
+            townTextBox.Size = new Size(106, 23);
+            townTextBox.TabIndex = 9;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Bisque;
-            this.ClientSize = new System.Drawing.Size(560, 270);
-            this.Controls.Add(this.townTextBox);
-            this.Controls.Add(this.idTextBox);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.townListBox);
-            this.Controls.Add(this.townComboBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load_2);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Bisque;
+            ClientSize = new Size(560, 270);
+            Controls.Add(townTextBox);
+            Controls.Add(idTextBox);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(townListBox);
+            Controls.Add(townComboBox);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Margin = new Padding(2);
+            Name = "Form1";
+            Text = "Form1";
+            Load += Form1_Load_2;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -30,7 +30,8 @@ namespace SQL_Implementation
             InitializeComponent();
             this.parent = parent;
             button1.Text = this.parent.Data;
-            if (button1.Enabled == true)
+            button3.Text = this.parent.Data;
+            if (button1.Enabled == true && button3.Enabled==true)
             {
                 button2.Text = "Users";
 
@@ -40,7 +41,7 @@ namespace SQL_Implementation
 
         private void Form2_Load_1(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30");
             con.Open();
             SqlCommand cmd = new SqlCommand("SELECT ID, CountryName from Countries", con);
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -54,7 +55,7 @@ namespace SQL_Implementation
             con.Close();
 
 
-            SqlConnection conn = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30");
             conn.Open();
             SqlCommand cmdd = new SqlCommand("SELECT ID, townName from Towns", conn);
             SqlDataAdapter adapterr = new SqlDataAdapter();
@@ -77,20 +78,22 @@ namespace SQL_Implementation
             if (conditionMet)
             {
                 button1.Enabled = true;
+                button3.Enabled = true;
             }
             else
             {
                 button1.Enabled = false;
+                button3.Enabled= false;
             }
         }
 
         private void LoadTownsForCountry(int countryId)
         {
-            string connectionString = @"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True";
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 string query = "SELECT ID, CityName FROM Cities WHERE CountryID = @CountryID";
-                
+
             }
         }
 
@@ -103,7 +106,7 @@ namespace SQL_Implementation
 
         private void countriesComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30");
             string query = "SELECT ID, townName FROM Towns WHERE CountryID = @CountryID";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
@@ -131,18 +134,18 @@ namespace SQL_Implementation
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(button1.Enabled == true)
-            {
+
+                Form6 form6 = new Form6(this);
+                form6.ShowDialog(); 
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
                 Form8 form8 = new Form8();
                 form8.Show();
-
-            }
-            else
-            {
-                Form6 form6 = new Form6(this);
-                form6.ShowDialog();
-            }
-            
 
         }
     }

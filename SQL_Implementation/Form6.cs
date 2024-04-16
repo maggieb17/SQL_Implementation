@@ -71,7 +71,7 @@ namespace SQL_Implementation
 
         private void DisplayImageFromDatabase()
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30"))
             {
                 con.Open();
 
@@ -125,7 +125,7 @@ namespace SQL_Implementation
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            using SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True");
+            using SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30");
             con.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO Picture VALUES (@photo)", con);
             con.Close();
@@ -135,23 +135,38 @@ namespace SQL_Implementation
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source=LAB108PC19\SQLEXPRESS;Initial Catalog=Magdalena;Integrated Security=True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Pavel Bonev\Documents\Magdalena.mdf"";Integrated Security=True;Connect Timeout=30"))
             {
                 con.Open();
 
-                // Convert image to byte array
                 byte[] imageBytes = ImageToByteArray(pictureBox1.Image);
 
-                SqlCommand insertCmd = new SqlCommand("INSERT INTO User_Profiles (UserID, Picture, FirstName, LastName, Country, Gender) VALUES (@userID, @picture, @fname, @lname, @country, @gender)", con);
-                SqlCommand cmdd = new SqlCommand("SELECT ID from Users", con);
-                int userID = Convert.ToInt32(cmdd.ExecuteScalar());
-                insertCmd.Parameters.AddWithValue("@userID", userID);
-                insertCmd.Parameters.AddWithValue("@picture", imageBytes);
-                insertCmd.Parameters.AddWithValue("@fname", firstBox1.Text);
-                insertCmd.Parameters.AddWithValue("@lname", lastBox2.Text);
-                insertCmd.Parameters.AddWithValue("@country", textBox1.Text);
-                insertCmd.Parameters.AddWithValue("@gender", radioButton1.Checked ? "Male" : "Female"); // Assuming you want to store the gender as string
-                int rowsAffected = insertCmd.ExecuteNonQuery();
+                int userID = 0;
+                using (SqlCommand cmdd = new SqlCommand("SELECT ID FROM Users", con))
+                {
+                    object result = cmdd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        userID = Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                    }
+                }
+
+                using (SqlCommand insertCmd = new SqlCommand("INSERT INTO User_Profiles (UserID, Picture, FirstName, LastName, Country, Gender) VALUES (@userID, @picture, @fname, @lname, @country, @gender)", con))
+                {
+                    insertCmd.Parameters.AddWithValue("@userID", userID);
+                    insertCmd.Parameters.AddWithValue("@picture", imageBytes);
+                    insertCmd.Parameters.AddWithValue("@fname", firstBox1.Text);
+                    insertCmd.Parameters.AddWithValue("@lname", lastBox2.Text);
+                    insertCmd.Parameters.AddWithValue("@country", textBox1.Text);
+                    insertCmd.Parameters.AddWithValue("@gender", radioButton1.Checked ? "Female" : "Male");
+
+                    // Execute the query
+                    int rowsAffected = insertCmd.ExecuteNonQuery();
+                }
 
                 con.Close();
 
